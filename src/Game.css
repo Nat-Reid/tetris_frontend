@@ -1,0 +1,16 @@
+.tile{
+  background-image: url(./logo.svg);
+  background-color: green;
+  overflow: hidden;
+  border: 1px solid black;
+}
+
+.grid{
+  display: grid;
+  grid-template-columns: repeat(10,1fr);
+  grid-template-rows: repeat(20,1fr);
+  background-color: purple;
+  width: 45vh;
+  height: 95vh;
+  margin: 0 auto;
+}
