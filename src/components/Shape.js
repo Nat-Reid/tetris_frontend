@@ -11,15 +11,23 @@ class Shape extends Component {
 	}
 	componentDidMount = () => {
 		document.addEventListener('keydown', (event) => {
-			if (event.keyCode === 37) {
-				this.moveLeft();
-			} else if (event.keyCode === 39) {
-				this.moveRight();
-			} else if (event.keyCode === 40) {
-				this.moveDown();
+			switch(event.keyCode){
+				case 37 :
+					this.moveLeft();
+					break;
+				case 39 :
+					this.moveRight();
+					break;
+				case 40 :
+					this.moveDown();
+					break;
+				case 32 :
+					this.rotate();
+					break;
 			}
 		});
-	};
+	}
+
 	moveLeft = () => {
 		console.log('in the move left function');
 		this.state.centerPoint[1]--;
@@ -52,6 +60,15 @@ class Shape extends Component {
 			coordArry: down
 		});
 	};
+
+	rotate = (cx,cy,x,y) => {
+    let radians = (Math.PI / 180) * 90,
+        cos = Math.cos(radians),
+        sin = Math.sin(radians),
+        nx = (cos * (x - cx)) + (sin * (y - cy)) + cx,
+        ny = (cos * (y - cy)) - (sin * (x - cx)) + cy;
+    return [nx, ny];
+	}
 
 	render() {
 		return (
