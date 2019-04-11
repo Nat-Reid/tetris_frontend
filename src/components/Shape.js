@@ -5,7 +5,8 @@ class Shape extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			coordArry: [ [ 1, 5 ], [ 1, 6 ], [ 2, 5 ], [ 2, 6 ] ]
+			coordArry: [ [ 1, 5 ], [ 1, 6 ], [ 2, 5 ], [ 2, 6 ] ],
+			centerPoint: [ 1.5, 5.5 ]
 		};
 	}
 	componentDidMount = () => {
@@ -21,6 +22,7 @@ class Shape extends Component {
 	};
 	moveLeft = () => {
 		console.log('in the move left function');
+		this.state.centerPoint[1]--;
 		let left = this.state.coordArry.map((coord) => {
 			return [ coord[0], coord[1] - 1 ];
 		});
@@ -31,6 +33,7 @@ class Shape extends Component {
 
 	moveRight = () => {
 		console.log('in the move right function');
+		this.state.centerPoint[1]++;
 		let right = this.state.coordArry.map((coord) => {
 			return [ coord[0], coord[1] + 1 ];
 		});
@@ -40,6 +43,7 @@ class Shape extends Component {
 	};
 
 	moveDown = () => {
+		this.state.centerPoint[0]++;
 		console.log('in the move right function');
 		let down = this.state.coordArry.map((coord) => {
 			return [ coord[0] + 1, coord[1] ];
