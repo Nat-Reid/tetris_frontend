@@ -30,39 +30,39 @@ class Shape extends Component {
 	};
 
 	moveLeft = () => {
-		this.state.centerPoint[1]--;
 		let left = this.state.coordArry.map((coord) => {
 			return [ coord[0], coord[1] - 1 ];
 		});
 		if (!this.collision(left)) {
 			return;
 		}
+		this.state.centerPoint[1]--;
 		this.setState({
 			coordArry: left
 		});
 	};
 
 	moveRight = () => {
-		this.state.centerPoint[1]++;
 		let right = this.state.coordArry.map((coord) => {
 			return [ coord[0], coord[1] + 1 ];
 		});
 		if (!this.collision(right)) {
 			return;
 		}
+		this.state.centerPoint[1]++;
 		this.setState({
 			coordArry: right
 		});
 	};
 
 	moveDown = () => {
-		this.state.centerPoint[0]++;
 		let down = this.state.coordArry.map((coord) => {
 			return [ coord[0] + 1, coord[1] ];
 		});
 		if (!this.collision(down)) {
 			return;
 		}
+		this.state.centerPoint[0]++;
 		this.setState({
 			coordArry: down
 		});
@@ -77,6 +77,7 @@ class Shape extends Component {
 			return;
 		}
 		function actualrotatefunc([ cx, cy ], [ x, y ]) {
+			// debugger;
 			let radians = Math.PI / 180 * 90,
 				cos = Math.cos(radians),
 				sin = Math.sin(radians),
