@@ -10,6 +10,7 @@ class Shape extends Component {
 		};
 	}
 	componentDidMount = () => {
+		this.setShape();
 		document.addEventListener('keydown', (event) => {
 			switch (event.keyCode) {
 				case 37:
@@ -69,15 +70,11 @@ class Shape extends Component {
 	};
 
 	rotate = () => {
-		// this.setState((prevState) => {
-		// 	return { coordArry: prevState.coordArry.map((coord) => actualrotatefunc(this.state.centerPoint, coord)) };
-		// });
 		let rotated = this.state.coordArry.map((coord) => actualrotatefunc(this.state.centerPoint, coord));
 		if (!this.collision(rotated)) {
 			return;
 		}
 		function actualrotatefunc([ cx, cy ], [ x, y ]) {
-			// debugger;
 			let radians = Math.PI / 180 * 90,
 				cos = Math.cos(radians),
 				sin = Math.sin(radians),
@@ -91,12 +88,28 @@ class Shape extends Component {
 	};
 
 	collision = (collisionCoords) => {
-		// debugger;
 		return collisionCoords.every((coord) => actualcollisionfunc(coord));
-
 		function actualcollisionfunc(coord) {
 			return coord[1] >= 1 && coord[1] <= 10 && coord[0] <= 20;
 		}
+	};
+
+	setShape = () => {
+		let square = [ [ 1, 5 ], [ 1, 6 ], [ 2, 5 ], [ 2, 6 ] ];
+		let line = [ [ 1, 4 ], [ 1, 5 ], [ 1, 6 ], [ 1, 7 ] ];
+		let LShape = [ [ 1, 4 ], [ 2, 4 ], [ 3, 4 ], [ 3, 5 ] ];
+		let LreverseShape = [ [ 1, 5 ], [ 2, 5 ], [ 3, 4 ], [ 3, 5 ] ];
+		let stair = [ [ 1, 5 ], [ 2, 5 ], [ 2, 4 ], [ 3, 4 ] ];
+		let backwardsStair = [ [ 1, 4 ], [ 2, 4 ], [ 2, 5 ], [ 3, 5 ] ];
+		let Tshape = [ [ 1, 4 ], [ 1, 5 ], [ 2, 6 ], [ 2, 5 ] ];
+
+		let shapesArry = [ square, line, LShape, LreverseShape, stair, backwardsStair, Tshape ];
+		let randomItem = shapesArry[Math.floor(Math.random() * shapesArry.length)];
+
+		console.log(randomItem);
+		this.setState({
+			coordArry: randomItem
+		});
 	};
 
 	render() {

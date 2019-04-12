@@ -7,8 +7,10 @@
 .grid {
 	display: grid;
 	grid-template-columns: repeat(10, 1fr);
+	grid-row-gap: 1px grey solid;
 	grid-template-rows: repeat(20, 1fr);
-	background-color: #c9bca7;
+	background-color: white;
+	border: 1px grey solid;
 	width: 45vh;
 	height: 95vh;
 	margin: 0 auto;
