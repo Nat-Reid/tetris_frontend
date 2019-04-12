@@ -69,10 +69,13 @@ class Shape extends Component {
 	};
 
 	rotate = () => {
-		this.setState((prevState) => {
-			return { coordArry: prevState.coordArry.map((coord) => actualrotatefunc(this.state.centerPoint, coord)) };
-		});
-
+		// this.setState((prevState) => {
+		// 	return { coordArry: prevState.coordArry.map((coord) => actualrotatefunc(this.state.centerPoint, coord)) };
+		// });
+		let rotated = this.state.coordArry.map((coord) => actualrotatefunc(this.state.centerPoint, coord));
+		if (!this.collision(rotated)) {
+			return;
+		}
 		function actualrotatefunc([ cx, cy ], [ x, y ]) {
 			let radians = Math.PI / 180 * 90,
 				cos = Math.cos(radians),
@@ -81,6 +84,9 @@ class Shape extends Component {
 				ny = cos * (y - cy) - sin * (x - cx) + cy;
 			return [ nx, ny ];
 		}
+		this.setState({
+			coordArry: rotated
+		});
 	};
 
 	collision = (collisionCoords) => {
