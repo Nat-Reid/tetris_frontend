@@ -26,6 +26,7 @@ class Shape extends Component {
 					break;
 			}
 		});
+		let intervalID = window.setInterval(this.moveDown, 500)
 	}
 
 	moveLeft = () => {
