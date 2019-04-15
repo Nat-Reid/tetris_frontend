@@ -13,13 +13,14 @@ class Shape extends Component {
 		this.setShape();
 		document.addEventListener('keydown', this.keyListener);
 		this.intervalID = window.setInterval(this.moveDown, 500);
+		console.log("current shapes in didmount", this.props.currentShapes)
 	};
 
 	moveLeft = () => {
 		let left = this.state.coordArry.map((coord) => {
 			return [ coord[0], coord[1] - 1 ];
 		});
-		if (!this.sideCollision(left)) {
+		if (!this.collision(left, this.props.currentShapes)) {
 			return;
 		}
 		this.state.centerPoint[1]--;
@@ -49,7 +50,7 @@ class Shape extends Component {
 		let right = this.state.coordArry.map((coord) => {
 			return [ coord[0], coord[1] + 1 ];
 		});
-		if (!this.sideCollision(right)) {
+		if (!this.collision(right, this.props.currentShapes)) {
 			return;
 		}
 		this.state.centerPoint[1]++;
@@ -62,13 +63,14 @@ class Shape extends Component {
 		let down = this.state.coordArry.map((coord) => {
 			return [ coord[0] + 1, coord[1] ];
 		});
-		if (!this.bottomCollision(down)){
+		if (!this.collision(down, this.props.currentShapes)){
 			console.log("bottom")
+			// debugger
 			clearInterval(this.intervalID)
 			document.removeEventListener('keydown', this.keyListener)
-		}
-		if (!this.sideCollision(down)) {
-			return;
+			console.log("final coords", this.state.coordArry)
+			this.props.newShape(this.state.coordArry)
+			return
 		}
 		this.state.centerPoint[0]++;
 		this.setState({
@@ -78,7 +80,7 @@ class Shape extends Component {
 
 	rotate = () => {
 		let rotated = this.state.coordArry.map((coord) => actualrotatefunc(this.state.centerPoint, coord));
-		if (!this.sideCollision(rotated)) {
+		if (!this.collision(rotated, this.props.currentShapes)) {
 			return;
 		}
 		function actualrotatefunc([ cx, cy ], [ x, y ]) {
@@ -94,18 +96,19 @@ class Shape extends Component {
 		});
 	};
 
-	sideCollision = (collisionCoords) => {
-		return collisionCoords.every((coord) => actualcollisionfunc(coord));
-		function actualcollisionfunc(coord) {
-			return coord[1] >= 1 && coord[1] <= 10 && coord[0] <= 20;
-		}
-	};
 
 	bottomCollision = (collisionCoords) => {
 		return collisionCoords.every((coord) => actualcollisionfunc(coord));
 		function actualcollisionfunc(coord) {
 			return coord[0] <= 20;
 		}
+	}
+	collision = (collisionCoords, currentShapes) => {
+		return collisionCoords.every((coord) => actualcollisionfunc(coord));
+		function actualcollisionfunc(coord) {
+			return coord[1] >= 1 && coord[1] <= 10 && coord[0] <= 20 && currentShapes.every((tile) => !(coord[1] === tile[1] && coord[0] === tile[0])) //returns false is there is a collision
+			}
+
 	}
 
 	setShape = () => {
