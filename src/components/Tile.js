@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 class Tile extends Component {
 	render() {
-		return <span className="tile" style={{ gridArea: `${this.props.y} / ${this.props.x} / span 1 / span 1` }} />;
+		return <span className="tile" style={{ gridArea: `${this.props.row} / ${this.props.column} / span 1 / span 1` }} />;
 	}
 }
 

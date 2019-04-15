@@ -12,7 +12,7 @@ class Shape extends Component {
 	componentDidMount = () => {
 		this.setShape();
 		document.addEventListener('keydown', this.keyListener);
-		this.intervalID = window.setInterval(this.moveDown, 500);
+		// this.intervalID = window.setInterval(this.moveDown, 500); *************put back very important this is commented because we are debugging
 		console.log("current shapes in didmount", this.props.currentShapes)
 	};
 
@@ -141,7 +141,7 @@ class Shape extends Component {
 		return (
 			<Fragment>
 				{this.state.coordArry.map((coord, index) => {
-					return <Tile y={coord[0]} x={coord[1]} key={index} />;
+					return <Tile row={coord[0]} column={coord[1]} key={index} />;
 				})}
 			</Fragment>
 		);
