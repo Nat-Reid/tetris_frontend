@@ -8,12 +8,6 @@ class CSSGrid extends Component {
 		};
 	}
 
-	// renderTiles(){
-	//   return new Array(200).fill(0).map((item,index) => {
-	//     return <span className="tile" key={index}></span>
-	//   })
-	// }
-
 	render() {
 		return (
 			<div className="grid">

@@ -11,30 +11,15 @@ class Shape extends Component {
 	}
 	componentDidMount = () => {
 		this.setShape();
-		document.addEventListener('keydown', (event) => {
-			switch (event.keyCode) {
-				case 37:
-					this.moveLeft();
-					break;
-				case 39:
-					this.moveRight();
-					break;
-				case 40:
-					this.moveDown();
-					break;
-				case 32:
-					this.rotate();
-					break;
-			}
-		});
-		let intervalID = window.setInterval(this.moveDown, 500);
+		document.addEventListener('keydown', this.keyListener);
+		this.intervalID = window.setInterval(this.moveDown, 500);
 	};
 
 	moveLeft = () => {
 		let left = this.state.coordArry.map((coord) => {
 			return [ coord[0], coord[1] - 1 ];
 		});
-		if (!this.collision(left)) {
+		if (!this.sideCollision(left)) {
 			return;
 		}
 		this.state.centerPoint[1]--;
@@ -43,11 +28,28 @@ class Shape extends Component {
 		});
 	};
 
+	keyListener = (event) => {
+		switch (event.keyCode) { //deprecated use event.key
+			case 37:
+				this.moveLeft();
+				break;
+			case 39:
+				this.moveRight();
+				break;
+			case 40:
+				this.moveDown();
+				break;
+			case 32:
+				this.rotate();
+				break;
+		}
+	}
+
 	moveRight = () => {
 		let right = this.state.coordArry.map((coord) => {
 			return [ coord[0], coord[1] + 1 ];
 		});
-		if (!this.collision(right)) {
+		if (!this.sideCollision(right)) {
 			return;
 		}
 		this.state.centerPoint[1]++;
@@ -60,7 +62,12 @@ class Shape extends Component {
 		let down = this.state.coordArry.map((coord) => {
 			return [ coord[0] + 1, coord[1] ];
 		});
-		if (!this.collision(down)) {
+		if (!this.bottomCollision(down)){
+			console.log("bottom")
+			clearInterval(this.intervalID)
+			document.removeEventListener('keydown', this.keyListener)
+		}
+		if (!this.sideCollision(down)) {
 			return;
 		}
 		this.state.centerPoint[0]++;
@@ -71,7 +78,7 @@ class Shape extends Component {
 
 	rotate = () => {
 		let rotated = this.state.coordArry.map((coord) => actualrotatefunc(this.state.centerPoint, coord));
-		if (!this.collision(rotated)) {
+		if (!this.sideCollision(rotated)) {
 			return;
 		}
 		function actualrotatefunc([ cx, cy ], [ x, y ]) {
@@ -87,28 +94,43 @@ class Shape extends Component {
 		});
 	};
 
-	collision = (collisionCoords) => {
+	sideCollision = (collisionCoords) => {
 		return collisionCoords.every((coord) => actualcollisionfunc(coord));
 		function actualcollisionfunc(coord) {
 			return coord[1] >= 1 && coord[1] <= 10 && coord[0] <= 20;
 		}
 	};
 
+	bottomCollision = (collisionCoords) => {
+		return collisionCoords.every((coord) => actualcollisionfunc(coord));
+		function actualcollisionfunc(coord) {
+			return coord[0] <= 20;
+		}
+	}
+
 	setShape = () => {
 		let square = [ [ 1, 5 ], [ 1, 6 ], [ 2, 5 ], [ 2, 6 ] ];
+		let squareCenterPoint = [1.5, 5.5]
 		let line = [ [ 1, 4 ], [ 1, 5 ], [ 1, 6 ], [ 1, 7 ] ];
+		let lineCenterPoint = [1.5, 5.5]
 		let LShape = [ [ 1, 4 ], [ 2, 4 ], [ 3, 4 ], [ 3, 5 ] ];
+		let LShapeCenterPoint = [2, 4]
 		let LreverseShape = [ [ 1, 5 ], [ 2, 5 ], [ 3, 4 ], [ 3, 5 ] ];
+		let LreverseShapeCenterPoint = [2, 5]
 		let stair = [ [ 1, 5 ], [ 2, 5 ], [ 2, 4 ], [ 3, 4 ] ];
+		let stairCenterPoint = [2, 5]
 		let backwardsStair = [ [ 1, 4 ], [ 2, 4 ], [ 2, 5 ], [ 3, 5 ] ];
-		let Tshape = [ [ 1, 4 ], [ 1, 5 ], [ 2, 6 ], [ 2, 5 ] ];
+		let backwardsStairPoint = [2, 4]
+		let Tshape = [ [ 1, 4 ], [ 1, 5 ], [ 1, 6 ], [ 2, 5 ] ];
+		let TshapeCenterPoint = [1, 5]
 
-		let shapesArry = [ square, line, LShape, LreverseShape, stair, backwardsStair, Tshape ];
+		let shapesArry = [ [square, squareCenterPoint], [line, lineCenterPoint], [LShape, LShapeCenterPoint], [LreverseShape, LreverseShapeCenterPoint], [stair, stairCenterPoint], [backwardsStair, backwardsStairPoint], [Tshape, TshapeCenterPoint]];
 		let randomItem = shapesArry[Math.floor(Math.random() * shapesArry.length)];
 
 		console.log(randomItem);
 		this.setState({
-			coordArry: randomItem
+			coordArry: randomItem[0],
+			centerPoint: randomItem[1]
 		});
 	};
 

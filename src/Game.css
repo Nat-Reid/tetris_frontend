@@ -1,6 +1,6 @@
 .tile {
-	/* background-image: url(./logo.svg); */
-	background-color: #99cca9;
+	background-image: url(./logo.svg);
+	background-color: #79ac69;
 	overflow: hidden;
 }
 
@@ -9,7 +9,7 @@
 	grid-template-columns: repeat(10, 1fr);
 	grid-row-gap: 1px grey solid;
 	grid-template-rows: repeat(20, 1fr);
-	background-color: white;
+	background-color: purple;
 	border: 1px grey solid;
 	width: 45vh;
 	height: 95vh;
