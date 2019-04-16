@@ -65,7 +65,7 @@ class CSSGrid extends Component {
 	render() {
 		return (
 			<div className="grid">
-			{this.state.renderShape ? <Shape currentShapes={this.state.currentShapes} newShape={this.newShape}/> : null }
+			{this.state.renderShape ? <Shape style={{backgroundColor: this.state.color}}currentShapes={this.state.currentShapes} newShape={this.newShape}/> : null }
 			{this.state.currentShapes.map((coord, index) => {
 					return <Tile row={coord[0]} column={coord[1]} key={index} />;
 				})}

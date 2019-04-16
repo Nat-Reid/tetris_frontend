@@ -128,6 +128,7 @@ class Shape extends Component {
 
 		let shapesArry = [ [square, squareCenterPoint], [line, lineCenterPoint], [LShape, LShapeCenterPoint], [LreverseShape, LreverseShapeCenterPoint], [stair, stairCenterPoint], [backwardsStair, backwardsStairPoint], [Tshape, TshapeCenterPoint]];
 		let randomItem = shapesArry[Math.floor(Math.random() * shapesArry.length)];
+		
 
 		this.setState({
 			coordArry: randomItem[0],
