@@ -22,9 +22,10 @@ class CSSGrid extends Component {
     for (let row = 20; row >= 1; row--){
       if (this.checkRow(row)){
         this.clearRow(row)
-        clearedRows.push(row)
+				clearedRows.push(row)
       }
     }
+    this.props.grabbingRows(clearedRows)
     clearedRows.reverse()
 
     clearedRows.forEach(row => this.shiftRows(row));

@@ -5,11 +5,23 @@ import './App.css';
 import './Game.css';
 
 class App extends Component {
+constructor(props) {
+  super(props);
+  this.state = {
+    clearedRows: []
+  }
+}
+
+  grabbingRows = (clearedrows) => {
+    this.setState({
+      clearedRows: clearedrows
+    })
+  }
   render() {
     return (
       <div className="App">
-        <ScoreBoard />
-        <CSSGrid />
+        <ScoreBoard clearedRows={this.state.clearedRows}/>
+        <CSSGrid grabbingRows={this.grabbingRows}/>
       </div>
     );
   }

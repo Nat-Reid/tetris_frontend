@@ -8,6 +8,31 @@ class ScoreBoard extends Component{
       score: 0
     } ;
   }
+componentWillReceiveProps(nextProps) {
+  this.calculateScore(nextProps)
+  console.log(this.state)
+}
+  calculateScore = (nextProps) => {
+    let addingScore = 0
+    switch (nextProps.clearedRows.length) {
+      case 1:
+      addingScore = 40;
+      break;
+      case 2:
+      addingScore = 100;
+      break;
+      case 3:
+      addingScore = 300;
+      break;
+      case 4:
+      addingScore = 1200;
+      break;
+    }
+    this.setState((prevState) => {
+      return {score: prevState.score + addingScore}
+    })
+  }
+
 
   render() {
     return (
