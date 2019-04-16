@@ -11,10 +11,9 @@ class CSSGrid extends Component {
 	}
 
   newShape = (coordArray) => {
-    console.log("NEW SHAPE FUNCTION")
     this.setState({
     	renderShape: false,
-    	currentShapes: this.state.currentShapes.concat(coordArray)
+			currentShapes: this.state.currentShapes.concat(coordArray)
     })
     this.setState({
     	renderShape: true
@@ -27,7 +26,7 @@ class CSSGrid extends Component {
       }
     }
     clearedRows.reverse()
-    console.log("rows to be shifted", clearedRows)
+
     clearedRows.forEach(row => this.shiftRows(row));
   }
 
@@ -36,7 +35,7 @@ class CSSGrid extends Component {
     this.setState({
       currentShapes: newCurrentShapes
     })
-    console.log("Clearing Row!", row)
+
   }
 
   checkRow = (row) =>{
@@ -45,17 +44,15 @@ class CSSGrid extends Component {
         return false
       }
     }
-    console.log("row full, should be cleared!")
+
     return true
   }
 
   shiftRows(row){
-    console.log("Shifting row", row)
     let newCurrentShapes = this.state.currentShapes.map(cs => {
       if (cs[0] < row){
         return [cs[0]+1, cs[1]]
       }else{
-        console.log(cs)
         return cs
       }
     })

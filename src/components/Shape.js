@@ -64,13 +64,12 @@ class Shape extends Component {
 			return [ coord[0] + 1, coord[1] ];
 		});
 		if (!this.collision(down, this.props.currentShapes)){
-			console.log("bottom")
 			clearInterval(this.intervalID)
 			document.removeEventListener('keydown', this.keyListener)
 			if (this.endGame()){
 				console.log("GAME OVER")
+				return;
 			}else{
-				console.log("final coords", this.state.coordArry)
 				this.props.newShape(this.state.coordArry)
 				return
 			}
@@ -103,12 +102,6 @@ class Shape extends Component {
 	};
 
 
-	bottomCollision = (collisionCoords) => {
-		return collisionCoords.every((coord) => actualcollisionfunc(coord));
-		function actualcollisionfunc(coord) {
-			return coord[0] <= 20;
-		}
-	}
 	collision = (collisionCoords, currentShapes) => {
 		return collisionCoords.every((coord) => actualcollisionfunc(coord));
 		function actualcollisionfunc(coord) {
@@ -136,7 +129,6 @@ class Shape extends Component {
 		let shapesArry = [ [square, squareCenterPoint], [line, lineCenterPoint], [LShape, LShapeCenterPoint], [LreverseShape, LreverseShapeCenterPoint], [stair, stairCenterPoint], [backwardsStair, backwardsStairPoint], [Tshape, TshapeCenterPoint]];
 		let randomItem = shapesArry[Math.floor(Math.random() * shapesArry.length)];
 
-		console.log(randomItem);
 		this.setState({
 			coordArry: randomItem[0],
 			centerPoint: randomItem[1]
