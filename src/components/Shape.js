@@ -40,7 +40,7 @@ class Shape extends Component {
 			case 40:
 				this.moveDown();
 				break;
-			case 32:
+			case 38:
 				this.rotate();
 				break;
 		}
