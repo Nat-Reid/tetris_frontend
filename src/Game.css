@@ -1,21 +1,20 @@
 .tile {
 	background: url(./logo.svg) no-repeat center;
-	background-color: #FFF8F0;
+	background-color: #588B8B;
 	overflow: hidden;
 }
 
 .grid {
 	display: grid;
 	grid-template-columns: repeat(10, 1fr);
-	grid-row-gap: 1px grey solid;
 	grid-template-rows: repeat(20, 1fr);
-	background-color: white;
-	border: 1px grey solid;
+	background-color: #D8E2DC;
+	border: 1px solid  #798478;
 	width: 45vh;
 	height: 95vh;
 	margin: 0 auto;
 }
 
 body {
-background-color: #A0A09F;
+background-color: #F9FFFA;
 }
