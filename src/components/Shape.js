@@ -65,12 +65,15 @@ class Shape extends Component {
 		});
 		if (!this.collision(down, this.props.currentShapes)){
 			console.log("bottom")
-			// debugger
 			clearInterval(this.intervalID)
 			document.removeEventListener('keydown', this.keyListener)
-			console.log("final coords", this.state.coordArry)
-			this.props.newShape(this.state.coordArry)
-			return
+			if (this.endGame()){
+				console.log("GAME OVER")
+			}else{
+				console.log("final coords", this.state.coordArry)
+				this.props.newShape(this.state.coordArry)
+				return
+			}
 		}
 		this.state.centerPoint[0]++;
 		this.setState({
@@ -78,6 +81,9 @@ class Shape extends Component {
 		});
 	};
 
+	endGame(){
+		return !this.state.coordArry.every(coord => coord[0] > 1)
+	}
 	rotate = () => {
 		let rotated = this.state.coordArry.map((coord) => actualrotatefunc(this.state.centerPoint, coord));
 		if (!this.collision(rotated, this.props.currentShapes)) {
