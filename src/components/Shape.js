@@ -12,7 +12,7 @@ class Shape extends Component {
 	componentDidMount = () => {
 		this.setShape();
 		document.addEventListener('keydown', this.keyListener);
-		// this.intervalID = window.setInterval(this.moveDown, 500); *************put back very important this is commented because we are debugging
+		this.intervalID = window.setInterval(this.moveDown, 500);
 		console.log("current shapes in didmount", this.props.currentShapes)
 	};
 
