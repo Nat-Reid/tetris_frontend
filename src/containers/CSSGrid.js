@@ -19,12 +19,16 @@ class CSSGrid extends Component {
     this.setState({
     	renderShape: true
     })
+    let clearedRows = []
     for (let row = 20; row >= 1; row--){
       if (this.checkRow(row)){
         this.clearRow(row)
-        this.shiftRows(row)
+        clearedRows.push(row)
       }
     }
+    clearedRows.reverse()
+    console.log("rows to be shifted", clearedRows)
+    clearedRows.forEach(row => this.shiftRows(row));
   }
 
   clearRow = (row) => {
@@ -59,6 +63,7 @@ class CSSGrid extends Component {
       currentShapes: newCurrentShapes
     })
   }
+
 	render() {
 		return (
 			<div className="grid">
