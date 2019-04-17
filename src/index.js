@@ -28,7 +28,7 @@ class Routing extends Component {
       <Router>
         <div>
           <Switch>
-            <Route exact path="/" render={() => !this.state.finalScore ? <App setFinalScore={this.setFinalScore} /> : <Redirect to='/savescore' />} />
+            <Route exact path="/" render={() => !this.state.finalScore || !this.state.finalScore === 0 ? <App setFinalScore={this.setFinalScore} /> : <Redirect to='/savescore' />} />
             
             
             <Route path="/savescore" component={() => <SaveScore finalScore={this.state.finalScore} />}/>

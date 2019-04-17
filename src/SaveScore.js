@@ -16,7 +16,8 @@ class SaveScore extends Component{
   handleSubmit = (ev) => {
     fetch("http://localhost:3000/api/v1/scores", {
       method: "POST",
-      body: {score: this.props.finalScore, user: this.state.initials}
+      headers: { "Content-Type": "application/json"},
+      body: JSON.stringify( {score: this.props.finalScore, initials: this.state.initials})
     })
   }
   render() {
