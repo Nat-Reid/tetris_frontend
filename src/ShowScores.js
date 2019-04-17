@@ -14,14 +14,15 @@ class ShowScores extends Component{
       return response.json()
     })
     .then(json => {
-      console.log("scores response",json)
+      let sorted = json.sort(function (a, b) { return b.score - a.score });
+      console.log(sorted)
       this.setState({highScores: json})
     });
   }
 
   renderScores = () =>{
     return this.state.highScores.map(score => {
-      return <p>{score.score}</p>
+      return <p>{score.user.initials} | {score.score}</p>
     })
   }
 

@@ -22,13 +22,13 @@ class SaveScore extends Component{
   }
   render() {
     return (
-      <Form onSubmit={this.handleSubmit}>
+      <Form action="http://localhost:3001/showscores" onSubmit={this.handleSubmit}>
         <h1>Final Score {this.props.finalScore} !!!! YEAH</h1>
         <Form.Field>
           <label>Put In Your Initials! </label>
           <input type="text" value={this.state.initials} onChange={this.handleChange}/>
         </Form.Field>
-        <Button> Save Score1!!1!</Button>
+        <Button>Save Score</Button>
       </Form>
     );
   }
