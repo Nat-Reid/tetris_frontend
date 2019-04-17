@@ -68,6 +68,7 @@ class Shape extends Component {
 			document.removeEventListener('keydown', this.keyListener)
 			if (this.endGame()){
 				console.log("GAME OVER")
+				this.props.gameOver()
 				return;
 			}else{
 				this.props.newShape(this.state.coordArry)
