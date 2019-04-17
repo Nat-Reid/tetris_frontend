@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Shape from '../components/Shape';
 import Tile from '../components/Tile'
+
 class CSSGrid extends Component {
 	constructor(props) {
 		super(props);

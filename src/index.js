@@ -1,28 +1,43 @@
-import React from 'react';
+import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import {Route, Link, Switch, BrowserRouter as Router} from 'react-router-dom'
 import './index.css';
 import App from './App';
-import Login from './Login';
-import SignUp from './SignUp';
+import SaveScore from './SaveScore';
+import ShowScores from './ShowScores';
 import NotFound from './NotFound';
 import * as serviceWorker from './serviceWorker';
 
 
-const routing = (
-  <Router>
-    <div>
-      <Switch>
-        <Route exact path="/" component={App}/>
-        <Route path="/signup" component={SignUp}/>
-        <Route path="/login" component={Login}/>
-        <Route component={NotFound}/>
-      </Switch>
-    </div>
-  </Router>
-)
+class Routing extends Component {
+  constructor(props){
+    super(props)
+    this.state = {
+      finalScore: 0
+    }
+  }
 
-ReactDOM.render(routing, document.getElementById('root'));
+  setFinalScore = (finalScore) => {
+    this.setState({finalScore})
+  }
+
+  render(){
+    return(
+      <Router>
+        <div>
+          <Switch>
+            <Route exact path="/" component={() => <App setFinalScore={this.setFinalScore}/>}/>
+            <Route path="/savescore" component={() => <SaveScore finalScore={this.state.finalScore} />}/>
+            <Route path="/showscores" component={ShowScores}/>
+            <Route component={NotFound}/>
+          </Switch>
+        </div>
+      </Router>
+    )
+  }
+}
+
+ReactDOM.render(<Routing />, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
