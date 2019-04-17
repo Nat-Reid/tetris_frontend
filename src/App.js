@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom'
 import ScoreBoard from './containers/scoreboard'
 import CSSGrid from './containers/CSSGrid'
 import './App.css';
