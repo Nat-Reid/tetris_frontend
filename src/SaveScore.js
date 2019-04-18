@@ -15,7 +15,7 @@ class SaveScore extends Component{
 
   handleSubmit = (ev) => {
     ev.preventDefault()
-    fetch("http://localhost:3000/api/v1/scores", {
+    fetch("https://reactetris-backend.herokuapp.com/api/v1/scores", {
       method: "POST",
       headers: { "Content-Type": "application/json"},
       body: JSON.stringify( {score: this.props.finalScore, initials: this.state.initials})

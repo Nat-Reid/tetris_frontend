@@ -9,7 +9,7 @@ class ShowScores extends Component{
   }
 
   componentDidMount(){
-    fetch("http://localhost:3000/api/v1/scores")
+    fetch("https://reactetris-backend.herokuapp.com/api/v1/scores")
     .then(response => {
       return response.json()
     })
