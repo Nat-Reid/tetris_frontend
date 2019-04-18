@@ -19,7 +19,7 @@ class Routing extends Component {
   }
 
   setFinalScore = (finalScore) => {
-    this.setState({ finalScore }) 
+    this.setState({ finalScore })
   }
 
   render(){
@@ -28,9 +28,9 @@ class Routing extends Component {
       <Router>
         <div>
           <Switch>
-            <Route exact path="/" render={() => !this.state.finalScore || !this.state.finalScore === 0 ? <App setFinalScore={this.setFinalScore} /> : <Redirect to='/savescore' />} />
-            
-            
+            <Route exact path="/" render={() => this.state.finalScore === null ? <App setFinalScore={this.setFinalScore} /> : <Redirect to='/savescore' />} />
+
+
             <Route path="/savescore" component={() => <SaveScore finalScore={this.state.finalScore} />}/>
             <Route path="/showscores" component={ShowScores}/>
             <Route component={NotFound}/>

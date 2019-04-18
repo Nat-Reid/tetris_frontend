@@ -30,20 +30,28 @@ class Shape extends Component {
 	};
 
 	keyListener = (event) => {
-		switch (event.keyCode) { //deprecated use event.key
-			case 37:
+		switch (event.key) {
+			case "ArrowLeft":
 				this.moveLeft();
 				break;
-			case 39:
+			case "ArrowRight":
 				this.moveRight();
 				break;
-			case 40:
+			case "ArrowDown":
 				this.moveDown();
 				break;
-			case 38:
+			case "ArrowUp":
 				this.rotate();
 				break;
+			case "p":
+				this.pause();
+				break;
 		}
+	}
+
+	pause = () => {
+		clearInterval(this.intervalID)
+		document.removeEventListener('keydown', this.keyListener)
 	}
 
 	moveRight = () => {
@@ -129,7 +137,7 @@ class Shape extends Component {
 
 		let shapesArry = [ [square, squareCenterPoint], [line, lineCenterPoint], [LShape, LShapeCenterPoint], [LreverseShape, LreverseShapeCenterPoint], [stair, stairCenterPoint], [backwardsStair, backwardsStairPoint], [Tshape, TshapeCenterPoint]];
 		let randomItem = shapesArry[Math.floor(Math.random() * shapesArry.length)];
-		
+
 
 		this.setState({
 			coordArry: randomItem[0],

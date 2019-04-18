@@ -14,15 +14,23 @@ class SaveScore extends Component{
   }
 
   handleSubmit = (ev) => {
+    ev.preventDefault()
     fetch("http://localhost:3000/api/v1/scores", {
       method: "POST",
       headers: { "Content-Type": "application/json"},
       body: JSON.stringify( {score: this.props.finalScore, initials: this.state.initials})
     })
+    .then(res => {
+      window.location.href = "http://localhost:3001/showscores"
+    })
   }
   render() {
+    if (this.props.finalScore === null){
+      window.location.href = "http://localhost:3001"
+      return
+    }
     return (
-      <Form action="http://localhost:3001/showscores" onSubmit={this.handleSubmit}>
+      <Form onSubmit={this.handleSubmit}>
         <h1>Final Score {this.props.finalScore} !!!! YEAH</h1>
         <Form.Field>
           <label>Put In Your Initials! </label>

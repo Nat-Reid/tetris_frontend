@@ -29,6 +29,7 @@ class ShowScores extends Component{
   render() {
     return (
       <div>
+        <a style={{float: "right"}}href="http://localhost:3001">Play Again!</a>
         <h1>High Scores:</h1>
         {this.renderScores()}
       </div>
