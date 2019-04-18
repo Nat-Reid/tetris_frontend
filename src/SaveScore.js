@@ -21,12 +21,12 @@ class SaveScore extends Component{
       body: JSON.stringify( {score: this.props.finalScore, initials: this.state.initials})
     })
     .then(res => {
-      window.location.href = "http://localhost:3001/showscores"
+      window.location.href = "https://reactetris.herokuapp.com/showscores"
     })
   }
   render() {
     if (this.props.finalScore === null){
-      window.location.href = "http://localhost:3001"
+      window.location.href = "https://reactetris.herokuapp.com/"
       return
     }
     return (
