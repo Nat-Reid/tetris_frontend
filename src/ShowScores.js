@@ -29,7 +29,7 @@ class ShowScores extends Component{
   render() {
     return (
       <div>
-        <a style={{ float: "right" }} href="https://reactetris.herokuapp.com/showscores">Play Again!</a>
+        <a style={{ float: "right" }} href="https://reactetris.herokuapp.com">Play Again!</a>
         <h1>High Scores:</h1>
         {this.renderScores()}
       </div>
