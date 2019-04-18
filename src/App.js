@@ -12,21 +12,12 @@ class App extends Component {
       clearedRows: [],
       score: 0
     }
-    console.log("reloading app!")
   }
-  // componentWillReceiveProps(nextProps) {
-  //   this.calculateScore(nextProps)
-  // }
-
-  // getScore = (score) => {
-  //   this.setState({ score })
-  // }
-  // , () => this.props.setFinalScore(this.state.score)
+ 
 
 
   gameOver = () => {
     this.props.setFinalScore(this.state.score)
-    console.log("FINAL SCORE", this.state.score)
     
   }
 
