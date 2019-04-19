@@ -43,6 +43,9 @@ class Shape extends Component {
 			case "ArrowUp":
 				this.rotate();
 				break;
+			case " ":
+				this.fullDrop();
+				break;
 			case "p":
 				this.pause();
 				break;
@@ -72,16 +75,7 @@ class Shape extends Component {
 			return [ coord[0] + 1, coord[1] ];
 		});
 		if (!this.collision(down, this.props.currentShapes)){
-			clearInterval(this.intervalID)
-			document.removeEventListener('keydown', this.keyListener)
-			if (this.endGame()){
-				console.log("GAME OVER")
-				this.props.gameOver()
-				return;
-			}else{
-				this.props.newShape(this.state.coordArry)
-				return
-			}
+			return this.hitBottom()
 		}
 		this.state.centerPoint[0]++;
 		this.setState({
@@ -89,9 +83,35 @@ class Shape extends Component {
 		});
 	};
 
+	hitBottom(){
+		clearInterval(this.intervalID)
+		document.removeEventListener('keydown', this.keyListener)
+		if (this.endGame()){
+			console.log("GAME OVER")
+			this.props.gameOver()
+			return 8;
+		}else{
+			this.props.newShape(this.state.coordArry)
+			return
+		}
+	}
+
 	endGame(){
 		return !this.state.coordArry.every(coord => coord[0] > 1)
 	}
+
+	fullDrop(){
+		let droppedCoords = this.state.coordArry.slice()
+		console.log("in full drop")
+		while (this.collision(droppedCoords, this.props.currentShapes)){
+			console.log("dropping more")
+			droppedCoords.forEach(coord => coord[0]++)
+		}
+		droppedCoords.forEach(coord => coord[0]--)
+		this.setState({coordArry: droppedCoords})
+		this.hitBottom();
+	}
+
 	rotate = () => {
 		let rotated = this.state.coordArry.map((coord) => actualrotatefunc(this.state.centerPoint, coord));
 		if (!this.collision(rotated, this.props.currentShapes)) {
